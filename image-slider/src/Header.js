@@ -4,11 +4,8 @@ const Header = ({ country }) => {
   const [name, setName] = useState("Swastik");
 
   return (
-    <div>
-      <h1>
-        Hello {name} from {country}
-      </h1>
-      <button onClick={() => setName("John")}>Change Name</button>
+    <div style={{ textAlign: "center" }}>
+      <h1>Image Carousel</h1>
     </div>
   );
 };

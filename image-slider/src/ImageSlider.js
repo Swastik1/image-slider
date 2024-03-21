@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const data = [
   "https://static.vecteezy.com/system/resources/previews/032/242/170/non_2x/beautiful-waterfall-flowers-water-nature-waterfall-hd-wallpaper-ai-generated-free-photo.jpg",
@@ -9,16 +9,60 @@ const data = [
 ];
 
 const ImageSlider = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handlePrevClick = () => {
+    if (activeIndex === 0) {
+      setActiveIndex(data.length - 1);
+    } else {
+      setActiveIndex(activeIndex - 1);
+    }
+  };
+
+  const handleNextClick = () => {
+    setActiveIndex((activeIndex + 1) % data.length);
+  };
+
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      <img
-        src={data[0]}
-        alt="wallpaper images"
-        style={{
-          width: "500px",
-          borderRadius: "1rem",
-        }}
-      />
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <button
+          style={{
+            display: "flex",
+            margin: "1rem",
+            padding: "1rem",
+            height: "10px",
+            alignItems: "center",
+            fontSize: "bold",
+          }}
+          onClick={handlePrevClick}
+        >
+          Previous
+        </button>
+        <img
+          src={data[activeIndex]}
+          alt="wallpaper images"
+          style={{
+            width: "500px",
+            borderRadius: "1rem",
+          }}
+        />
+        <button
+          style={{
+            display: "flex",
+            margin: "1rem",
+            padding: "1rem",
+            height: "10px",
+            alignItems: "center",
+            position: "relative",
+          }}
+          onClick={handleNextClick}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
