@@ -12,11 +12,7 @@ const ImageSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handlePrevClick = () => {
-    if (activeIndex === 0) {
-      setActiveIndex(data.length - 1);
-    } else {
-      setActiveIndex(activeIndex - 1);
-    }
+    setActiveIndex(!activeIndex ? data.length - 1 : activeIndex - 1);
   };
 
   const handleNextClick = () => {
@@ -41,14 +37,18 @@ const ImageSlider = () => {
         >
           Previous
         </button>
-        <img
-          src={data[activeIndex]}
-          alt="wallpaper images"
-          style={{
-            width: "500px",
-            borderRadius: "1rem",
-          }}
-        />
+        {data.map((url, i) => (
+          <img
+            src={url}
+            alt="wallpaper images"
+            style={{
+              width: "700px",
+              height: "500px",
+              objectFit: i === activeIndex ? "contain" : "hidden",
+              display: i === activeIndex ? "block" : "none",
+            }}
+          />
+        ))}
         <button
           style={{
             display: "flex",
